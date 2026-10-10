@@ -1,0 +1,257 @@
+import { Zone, InspectionRecord } from '../types';
+
+export const INITIAL_ZONES: Zone[] = [
+  {
+    id: 'z-1',
+    name: 'หน้าอาคาร 1 (อาคารเฉลิมพระเกียรติ)',
+    locationArea: 'โซนหน้าเสาธงและลานเข้าแถว',
+    assignedClass: 'ม.1/1',
+    advisorTeacher: 'ครูสมศรี ศรีสุข',
+    description: 'กวาดลานหน้าอาคาร จัดเก้าอี้พักคอย และเก็บใบไม้ใต้ร่มไม้',
+  },
+  {
+    id: 'z-2',
+    name: 'ลานธรรมและพระพุทธรูปประจำโรงเรียน',
+    locationArea: 'สวนหย่อมด้านทิศตะวันออก',
+    assignedClass: 'ม.2/1',
+    advisorTeacher: 'ครูปรีชา สุขสันต์',
+    description: 'ดูแลความสะอาดแท่นบูชา ปัดกวาดใบไม้แห้ง และรดน้ำต้นไม้',
+  },
+  {
+    id: 'z-3',
+    name: 'โรงอาหารกลางและจุดทิ้งเศษอาหาร',
+    locationArea: 'อาคารโภชนาการ',
+    assignedClass: 'ม.3/1',
+    advisorTeacher: 'ครูกมลวรรณ ชูศรี',
+    description: 'เช็ดโต๊ะอาหาร กวาดพื้นทางเดิน และดูแลจุดคัดแยกขยะ',
+  },
+  {
+    id: 'z-4',
+    name: 'สนามบาสเกตบอลและลานกีฬาเอนกประสงค์',
+    locationArea: 'ลานกีฬากลางแจ้ง',
+    assignedClass: 'ม.4/1',
+    advisorTeacher: 'ครูวิโรจน์ แสงทอง',
+    description: 'เก็บแก้วน้ำขวดน้ำรอบอัฒจันทร์ และกวาดพื้นสนาม',
+  },
+  {
+    id: 'z-5',
+    name: 'ห้องน้ำชาย-หญิง หลังอาคาร 2',
+    locationArea: 'สุขศึกษาและบริการ',
+    assignedClass: 'ม.5/2',
+    advisorTeacher: 'ครูอรัญญา พิทักษ์',
+    description: 'ตรวจเช็คความสะอาดสุขภัณฑ์ อ่างล้างมือ และเทถังขยะ',
+  },
+  {
+    id: 'z-6',
+    name: 'สวนป่าเฉลิมพระเกียรติและแปลงเกษตร',
+    locationArea: 'ด้านหลังโรงเรียนติดคูคลอง',
+    assignedClass: 'ม.6/2',
+    advisorTeacher: 'ครูสุชาติ วงศ์สว่าง',
+    description: 'กวาดทางเดินดิน ลิดกิ่งไม้แห้ง และตรวจดูขยะตามพุ่มไม้',
+  },
+  {
+    id: 'z-7',
+    name: 'ลานหน้าห้องสมุดและห้องแนะแนว',
+    locationArea: 'อาคารวิชาการ ชั้น 1',
+    assignedClass: 'ม.2/3',
+    advisorTeacher: 'ครูนิตยา เกียรติก้อง',
+    description: 'กวาดระเบียงหน้าห้องสมุด จัดชั้นวางรองเท้าให้เป็นระเบียบ',
+  },
+  {
+    id: 'z-8',
+    name: 'ทางเชื่อมอาคาร 1 และอาคาร 3',
+    locationArea: 'สะพานเชื่อมชั้นลอย',
+    assignedClass: 'ม.3/3',
+    advisorTeacher: 'ครูเอกชัย ชัยชนะ',
+    description: 'ปัดกวาดทางเดินและเช็ดราวกั้นทางเดิน',
+  },
+];
+
+// Helper to generate ISO dates for today and previous days
+const now = new Date();
+const todayISO = (hours: number, minutes: number) => {
+  const d = new Date(now);
+  d.setHours(hours, minutes, 0, 0);
+  return d.toISOString();
+};
+
+const pastDateISO = (daysAgo: number, hours: number, minutes: number) => {
+  const d = new Date(now);
+  d.setDate(d.getDate() - daysAgo);
+  d.setHours(hours, minutes, 0, 0);
+  return d.toISOString();
+};
+
+export const INITIAL_INSPECTIONS: InspectionRecord[] = [
+  {
+    id: 'insp-1',
+    date: todayISO(7, 45),
+    zoneId: 'z-1',
+    zoneName: 'หน้าอาคาร 1 (อาคารเฉลิมพระเกียรติ)',
+    assignedClass: 'ม.1/1',
+    inspectorRole: 'committee',
+    inspectorName: 'ด.ช. ปวริศร์ จันทรังษี (กรรมการสภานักเรียน)',
+    status: 'pass',
+    criteria: {
+      litterFree: true,
+      binsCleaned: true,
+      orderlyArranged: true,
+      noStainsWater: true,
+    },
+    note: 'กวาดใบไม้เรียบร้อยดีมาก ลานหน้าอาคารสะอาดสมบูรณ์',
+  },
+  {
+    id: 'insp-2',
+    date: todayISO(7, 50),
+    zoneId: 'z-2',
+    zoneName: 'ลานธรรมและพระพุทธรูปประจำโรงเรียน',
+    assignedClass: 'ม.2/1',
+    inspectorRole: 'student',
+    inspectorName: 'ด.ญ. ธัญญาเรศ ชัยพฤกษ์ (นักเรียนเวร)',
+    status: 'pass',
+    criteria: {
+      litterFree: true,
+      binsCleaned: true,
+      orderlyArranged: true,
+      noStainsWater: true,
+    },
+    note: 'รดน้ำต้นไม้และจัดดอกไม้บูชาพระพุทธรูปเรียบร้อย',
+  },
+  {
+    id: 'insp-3',
+    date: todayISO(7, 55),
+    zoneId: 'z-3',
+    zoneName: 'โรงอาหารกลางและจุดทิ้งเศษอาหาร',
+    assignedClass: 'ม.3/1',
+    inspectorRole: 'committee',
+    inspectorName: 'สารวัตรนักเรียนฝ่ายอาคาร',
+    status: 'pass',
+    criteria: {
+      litterFree: true,
+      binsCleaned: true,
+      orderlyArranged: true,
+      noStainsWater: true,
+    },
+    note: 'โต๊ะทานอาหารเช็ดสะอาด แยกขยะเป็นระเบียบ',
+  },
+  {
+    id: 'insp-4',
+    date: todayISO(8, 5),
+    zoneId: 'z-5',
+    zoneName: 'ห้องน้ำชาย-หญิง หลังอาคาร 2',
+    assignedClass: 'ม.5/2',
+    inspectorRole: 'committee',
+    inspectorName: 'สารวัตรนักเรียนฝ่ายอาคาร',
+    status: 'fail',
+    criteria: {
+      litterFree: false,
+      binsCleaned: false,
+      orderlyArranged: true,
+      noStainsWater: false,
+    },
+    note: 'ยังไม่ได้เทถังขยะข้างโถสุขภัณฑ์ และมีกระดาษชำระตกหล่นบริเวณพื้นอ่างล้างมือ',
+  },
+  {
+    id: 'insp-5',
+    date: pastDateISO(1, 8, 10),
+    zoneId: 'z-4',
+    zoneName: 'สนามบาสเกตบอลและลานกีฬาเอนกประสงค์',
+    assignedClass: 'ม.4/1',
+    inspectorRole: 'student',
+    inspectorName: 'นายธนาธิป สงขลานุกูล',
+    status: 'pass',
+    criteria: {
+      litterFree: true,
+      binsCleaned: true,
+      orderlyArranged: true,
+      noStainsWater: true,
+    },
+    note: 'สนามสะอาด ไม่มีขวดน้ำตกค้างบนอัฒจันทร์',
+  },
+  {
+    id: 'insp-6',
+    date: pastDateISO(1, 8, 15),
+    zoneId: 'z-5',
+    zoneName: 'ห้องน้ำชาย-หญิง หลังอาคาร 2',
+    assignedClass: 'ม.5/2',
+    inspectorRole: 'student',
+    inspectorName: 'น.ส. นภัสสร วัฒนศิลป์',
+    status: 'pass',
+    criteria: {
+      litterFree: true,
+      binsCleaned: true,
+      orderlyArranged: true,
+      noStainsWater: true,
+    },
+    note: 'ทำความสะอาดเรียบร้อยดี เปลี่ยนถุงดำถังขยะแล้ว',
+  },
+  {
+    id: 'insp-7',
+    date: pastDateISO(2, 7, 50),
+    zoneId: 'z-6',
+    zoneName: 'สวนป่าเฉลิมพระเกียรติและแปลงเกษตร',
+    assignedClass: 'ม.6/2',
+    inspectorRole: 'committee',
+    inspectorName: 'สารวัตรนักเรียนประจำวัน',
+    status: 'fail',
+    criteria: {
+      litterFree: false,
+      binsCleaned: true,
+      orderlyArranged: true,
+      noStainsWater: true,
+    },
+    note: 'มีถุงพลาสติกและขยะใบไม้กองทับถมบริเวณข้างคูน้ำ ยังกวาดไม่เสร็จ',
+  },
+  {
+    id: 'insp-8',
+    date: pastDateISO(2, 16, 20),
+    zoneId: 'z-6',
+    zoneName: 'สวนป่าเฉลิมพระเกียรติและแปลงเกษตร',
+    assignedClass: 'ม.6/2',
+    inspectorRole: 'committee',
+    inspectorName: 'สารวัตรนักเรียนประจำวัน',
+    status: 'pass',
+    criteria: {
+      litterFree: true,
+      binsCleaned: true,
+      orderlyArranged: true,
+      noStainsWater: true,
+    },
+    note: 'นักเรียนเวรแก้ไขเรียบร้อยแล้วในช่วงเย็น สะอาดเรียบร้อย',
+    resolved: true,
+  },
+  {
+    id: 'insp-9',
+    date: pastDateISO(3, 8, 0),
+    zoneId: 'z-7',
+    zoneName: 'ลานหน้าห้องสมุดและห้องแนะแนว',
+    assignedClass: 'ม.2/3',
+    inspectorRole: 'student',
+    inspectorName: 'ด.ญ. พิชญา ศรีเมือง',
+    status: 'pass',
+    criteria: {
+      litterFree: true,
+      binsCleaned: true,
+      orderlyArranged: true,
+      noStainsWater: true,
+    },
+    note: 'จัดรองเท้าเป็นระเบียบ พื้นหน้าห้องสมุดสะอาด',
+  },
+  {
+    id: 'insp-10',
+    date: pastDateISO(4, 7, 55),
+    zoneId: 'z-8',
+    zoneName: 'ทางเชื่อมอาคาร 1 และอาคาร 3',
+    assignedClass: 'ม.3/3',
+    inspectorRole: 'student',
+    inspectorName: 'นายวรากร ทองสุข',
+    status: 'pass',
+    criteria: {
+      litterFree: true,
+      binsCleaned: true,
+      orderlyArranged: true,
+      noStainsWater: true,
+    },
+    note: 'สะอาดเรียบร้อย ราวสะพานสะอาด',
+  },
+];

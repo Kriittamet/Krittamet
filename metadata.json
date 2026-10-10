@@ -1,0 +1,6 @@
+{
+  "name": "ระบบตรวจเขตทำความสะอาด - โรงเรียนระโนดวิทยา",
+  "description": "ระบบบันทึกและรายงานผลการตรวจเขตพื้นที่ทำความสะอาด โรงเรียนระโนดวิทยา สำหรับนักเรียนเวร ครูที่ปรึกษา และผู้บริหาร",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
